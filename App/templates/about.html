@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PlantVision</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+
+/* Global styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: "Play", sans-serif;
+font-weight: 400;
+font-style: normal;
+}
+
+/* Background styles */
+body {
+  background-image: url("bg.png");
+  background-position: center;
+  background-size: cover;
+  height: 100ch;
+  background-attachment: fixed; /* Ensures the background image stays fixed while scrolling */
+  background-size: cover; /* Scales the background image to cover the entire container */
+  background-position: center; /* Centers the background image */
+}
+
+/* Navigation styles */
+.wrapper {
+    position: sticky;
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0.1rem;
+}
+
+nav {
+    margin: 22px auto 0px auto;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-radius: 0.4rem;
+    backdrop-filter: blur(12px) saturate(200%);
+    -webkit-backdrop-filter: blur(12px) saturate(200%);
+    background-color: rgba(17, 25, 40, 0.19);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    box-shadow: -11px 11px 22px #5a5a5a, 11px -11px 22px #ffffff;
+}
+
+.logo {
+    width: 90px;
+    margin: -23px auto -23px -12px;
+    padding: 6px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    font-size: x-large;
+    font-weight: bolder;
+}
+nav li a {
+    text-decoration: none;
+    padding: 1.1rem 0.8rem 0.8rem 0.8rem;
+    margin: 5px -7px -2px -21px;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    color: #000;
+    background-color: #23c483;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+nav li a:hover {
+    background: #f5ddb7;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #000000;
+    transform: translateY(-7px);
+}
+
+nav li a:active {
+    transform: translateY(-1px);
+}
+
+nav #toggle,
+nav label {
+    display: none;
+}
+
+@media (max-width: 40.625em) {
+    .menu ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
+    nav label {
+        display: inline-flex;
+        color: white;
+        cursor: pointer;
+    }
+    nav #toggle:checked ~ .menu ul {
+        display: flex;
+        height: 100%;
+    }
+}
+
+/* Main content styles */
+.card {
+    padding: 25px;
+    margin: 30px auto;
+    max-width: 700px;
+    backdrop-filter: blur(12px) saturate(200%);
+    -webkit-backdrop-filter: blur(12px) saturate(200%);
+    background-color: rgba(17, 25, 40, 0.19);
+    border-radius: 30px;
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: -11px 11px 22px #5a5a5a, 11px -11px 22px #ffffff;
+}
+
+h2{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.card h3{
+    margin-top: 2px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.card p {
+    margin-bottom: 10px;
+}
+
+.content{
+  border: 1px solid rgb(255, 255, 255);
+  padding: 10px;
+}
+.content ul {
+  margin: 5px auto 5px 30px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #45d000; 
+    margin: 50px 0 0 0;
+    color: #fff;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    backdrop-filter: blur(12px) saturate(200%);
+    -webkit-backdrop-filter: blur(12px) saturate(200%);
+    background-color: rgba(17, 25, 40, 0.19);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    box-shadow: -11px 11px 22px #5a5a5a, 11px -11px 22px #ffffff;
+}
+
+.fruit-img{
+  width: 90%;
+  margin: 0px 30px 10px 38px;
+}
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <div class="wrapper">
+        <nav>
+            <a href="/" class="logo">
+                <img class="logo" src="logo.png" alt="Logo" />
+            </a>
+            <input type="checkbox" name="" id="toggle" />
+            <label for="toggle"><i class="material-icons">menu</i></label>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/guess">Predict</a></li>
+                    <li><a href="/about">About</a></li>
+                  </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- NAVBAR -->
+
+
+    <div>
+        <h2>PlantVISION: An Image Based Plant Recognition System</h2>
+        
+        <div class="card">
+            <div class="content">
+                <h3>Overview:</h3>
+                <p>
+                    PlantVision is a web application designed to identify fruits and vegetables from images. The project utilizes HTML, CSS, JavaScript, and Flask for the frontend and backend development, along with a machine learning model for image classification.     
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="content">
+            <h3>About DATASET</h3>
+            <p>The dataset used in PlantVision contains images of various fruits and vegetables, including popular items such as bananas, apples, carrots, tomatoes, and more. The dataset is structured into three folders: Train, Test, and Validation, each containing a set number of images for training, testing, and validation purposes.</p>
+            <p>This dataset contains images of the following food items:
+            <ul>
+                <li>fruits- banana, apple, pear, grapes, orange, kiwi, watermelon, pomegranate, pineapple, mango.</li>
+                <li>vegetables- cucumber, carrot, capsicum, onion, potato, lemon, tomato, raddish, beetroot, cabbage,
+                    lettuce, spinach, soy bean, cauliflower, bell pepper, chilli pepper, turnip, corn, sweetcorn, sweet
+                    potato, paprika, jalepeño, ginger, garlic, peas, eggplant.</li>
+            </ul>
+            </p>
+        </div>
+    </div>    
+
+        <div class="card">
+            <div class="content">
+                <h3>Content</h3>
+                <p>This dataset contains three folders:
+                <ul>
+                    <li>Train (100 images each)</li>
+                    <li>Test (10images each)</li>
+                    <li>Validation (10 images each)</li>
+                </ul>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div >
+            <p>&copy; 2024 PlantVision. All rights reserved. | Furqan Khan</p>
+        </div>
+    </footer>
+</body>
+
+</html>
