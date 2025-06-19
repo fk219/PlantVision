@@ -1,0 +1,59 @@
+# Virtual environment
+venv/
+.venv/  # Common alternative name for virtual environments
+__pycache__/
+*.pyc
+*.pytest_cache/ # pytest cache directory
+
+# Dependencies
+/env/ # Another common virtual environment directory
+/build/
+/dist/
+*.egg-info/
+.coverage
+
+# CodeSandbox specific (assuming these are specific to Codesandbox environment setup)
+codesandbox/
+devcontainer/
+
+# OS generated files
+.DS_Store
+Thumbs.db # Windows thumbnail cache
+.localized # macOS localization file
+ehthumbs.db # Windows thumbnail cache for enhanced media
+Desktop.ini # Windows custom folder settings
+*.log
+*.sqlite3 # Common database file for sqlite
+
+# Environment variables
+.env
+.flaskenv # Flask specific environment file
+
+# Model related files
+models/.cache/ # As specified, for model cache
+*.h5 # Keras/TensorFlow saved models (if you generate them during runtime and don't want them tracked)
+*.pth # PyTorch saved models
+*.pt # PyTorch saved models (alternative)
+*.ckpt # Checkpoint files (e.g., from PyTorch Lightning, TensorFlow)
+*.onnx # ONNX models
+*.tflite # TensorFlow Lite models
+
+# Uploaded/Generated static files (based on your log: static/uploads/)
+static/uploads/ # Directory for user uploads, typically shouldn't be version controlled
+
+# IDE specific
+.vscode/ # VS Code configuration files
+.idea/ # IntelliJ/PyCharm configuration files
+*.sublime-project
+*.sublime-workspace
+
+# Editor specific
+*~ # Emacs/Vim temporary files
+.#* # Emacs lock files
+.#*# # Emacs backup files
+*.swp # Vim swap files
+*.swo # Vim swap files
+.DS_Store # macOS files
+
+# Jupyter Notebook files
+.ipynb_checkpoints/ # Jupyter Notebook checkpoints
