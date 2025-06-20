@@ -20,7 +20,7 @@ const About = () => {
   ];
 
   const stats = [
-    { value: '92.6%', label: 'Model Accuracy', color: 'green-600' },
+    { value: '82.7%', label: 'Model Accuracy', color: 'green-600' },
     { value: '<2s', label: 'Processing Time', color: 'blue-600' },
     { value: `${classes.length}`, label: 'Vegetable & Fruit Types', color: 'purple-600' }
   ];
@@ -49,7 +49,7 @@ const About = () => {
     // Load model
     const loadModel = async () => {
       try {
-        const model = await tf.loadLayersModel('/best_model.h5');
+        const model = await window.tf.loadLayersModel('/best_model.h5');
         console.log('Model loaded successfully.');
         window.model = model;
       } catch (err) {
@@ -70,11 +70,11 @@ const About = () => {
       return;
     }
 
-    const tensor = tf.browser
+    const tensor = window.tf.browser
       .fromPixels(img)
       .resizeNearestNeighbor([64, 64])
       .toFloat()
-      .div(tf.scalar(255))
+      .div(window.tf.scalar(255))
       .expandDims();
 
     const predictions = await window.model.predict(tensor).data();
@@ -104,9 +104,7 @@ const About = () => {
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4 sm:mb-6">
             About Plant Vision
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover how this AI-powered plant identifier works and learn about the journey behind it.
-          </p>
+          <p className="text-gray-600 max-w-3xl mx-auto">Discover how this AI-powered plant identifier works and learn about the journey behind it.</p>
         </div>
 
         {/* Project Overview */}
@@ -116,7 +114,8 @@ const About = () => {
             Project Overview
           </h2>
           <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-            Plant Vision is a personal project I developed entirely on my own. It uses a convolutional neural network (CNN) trained on a limited dataset of fruits and vegetables. The model was built using TensorFlow/Keras, fine-tuned with transfer learning, and optimized for fast inference. It currently supports over 36 types of fruits and vegetables.
+            Plant Vision is a personal project I developed entirely on my own. It uses a custom convolutional neural network (CNN) trained on a dataset of fruits and vegetables.
+            The model was built using TensorFlow/Keras, with data augmentation techniques such as random rotation, flip, and zoom applied during training. It supports classification across 36 different plant types.
           </p>
         </div>
 
@@ -127,7 +126,15 @@ const About = () => {
             Model Architecture
           </h3>
           <p className="leading-relaxed text-sm sm:text-base">
-            Built using a custom CNN architecture with dropout layers for regularization. The model consists of multiple convolutional and pooling layers followed by dense layers. It was trained using categorical cross-entropy loss and Adam optimizer. Total trainable parameters: ~6.6 million.
+            The CNN model consists of:
+            <ul className="list-disc ml-5 mt-2">
+              <li>2 convolutional blocks with MaxPooling and Dropout layers</li>
+              <li>Flattened output fed into dense layers</li>
+              <li>Dense layer with 512 units followed by another dense layer with 256 units</li>
+              <li>Dropout rates of 0.25 and 0.5 used for regularization</li>
+              <li>Final softmax layer for 36-class classification</li>
+            </ul>
+            Total trainable parameters: ~6.6 million. Optimizer used: Adam. Loss function: Categorical Crossentropy.
           </p>
         </div>
 
@@ -138,7 +145,9 @@ const About = () => {
             Training Process
           </h3>
           <p className="leading-relaxed text-sm sm:text-base">
-            The model was trained using data augmentation techniques including rotation, zoom, and horizontal flip. Early stopping and model checkpointing were used during training to prevent overfitting and ensure optimal performance. Final validation accuracy reached 92.6% after 50 epochs.
+            The model was trained for 50 epochs using a batch size of 32 and early stopping (patience=5) to prevent overfitting. Data augmentation techniques like horizontal flip, rotation, and zoom were applied to enhance generalization.
+            Validation accuracy reached <strong>82.6%</strong> after training, while test accuracy was <strong>82.7%</strong>.
+            Model checkpointing ensured saving only the best weights during training.
           </p>
         </div>
 
@@ -160,14 +169,15 @@ const About = () => {
           </div>
         </div>
 
-        {/* Development Team */}
+        {/* Developer Profile */}
         <div ref={el => (sectionRefs.current[5] = el)} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl shadow-xl p-4 sm:p-6 lg:p-8 text-white">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-3">
             <Info className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-yellow-400" />
             Developer Profile
           </h2>
-          <p className="leading-relaxed text-sm sm:text-base text-gray-300">
-            This entire project — from model training to web interface — was developed solo without any external help. I handled data preprocessing, model design, training, deployment, and frontend development. No third-party tools or pre-trained models were used beyond standard libraries like TensorFlow and React.
+          <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+            This project was developed entirely solo — from preprocessing the images, designing and training the model, to deploying the web interface. No pre-trained models or external help was used.
+            Tools include: TensorFlow/Keras for deep learning, React.js + TailwindCSS for frontend, and complete end-to-end implementation without any third-party ML pipelines.
           </p>
         </div>
       </div>
