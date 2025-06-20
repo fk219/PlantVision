@@ -68,7 +68,7 @@ const Home = () => {
     },
     {
       icon: Target,
-      title: '90%+ Accuracy',
+      title: '80%+ Accuracy',
       description: 'State-of-the-art CNN model ensures precise identification across 50+ vegetable varieties.'
     },
     {
